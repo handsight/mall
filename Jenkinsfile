@@ -76,23 +76,13 @@ node {
                  sh "docker rmi -f ${imageName}"
                  sh "docker rmi -f ${harbor_url}/${harbor_project_name}/${imageName}"
 
-
-
                 echo '遍历所有服务器，分别部署'
                 for(int j=0;j<selectedServers.length;j++){
-                     //获取当前遍历的服务器名称 master_server
-                      def currentServerName = selectedServers[j]
-                     //加上的参数格式：--spring.profiles.active=dev/prod
-//                      def activeProfile = "--spring.profiles.active="
-//
-//                      //根据不同的服务名称来读取不同的Eureka配置信息
-//                      if(currentServerName=="master_server"){
-//                         activeProfile = activeProfile+"eureka-server1"
-//                      }else if(currentServerName=="slave_server"){
-//                         activeProfile = activeProfile+"eureka-server2"
-//                      }
+                    //获取当前遍历的服务器名称 master_server
+                    def currentServerName = selectedServers[j]
 
                     echo "远程调用进行项目${currentProjectName}部署路径${currentServerName}"
+
                     sshPublisher(publishers: [sshPublisherDesc(configName: "${currentServerName}",
                     transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand:
                     "/opt/jenkins_shell/deployCluster.sh $harbor_url $harbor_project_name $currentProjectName $tag $currentProjectPort $harbor_username $harbor_password", execTimeout: 120000, flatten: false, makeEmptyDirs: false,
