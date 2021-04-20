@@ -34,7 +34,7 @@ node {
         def selectedServers = "${publish_server}".split(",")
 
         stage("拉取代码") {
-           checkout([$class: 'GitSCM', branches: [[name: "*/{branch}"]], extensions: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: 'git@github.com:handsight/mall.git']]])
+           checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], extensions: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: 'git@github.com:handsight/mall.git']]])
         }
 
 
