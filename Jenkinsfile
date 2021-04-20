@@ -6,7 +6,7 @@
 
 //=====需要修改的地方========
 //gitlab的凭证
-def git_auth = "dc6800ac-bdca-4422-8849-6c503de23d95"
+def git_auth = "d9b8e2b4-2cc4-48ba-8ba2-5a94ca01fee3"
 //Harbor私服地址
 def harbor_url = "192.168.249.129:85"
 //Harbor的项目名称
@@ -34,7 +34,7 @@ node {
         def selectedServers = "${publish_server}".split(",")
 
         stage("拉取代码") {
-           checkout([$class: 'GitSCM', branches: [[name: "*/{branch}"]], extensions: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: 'git@gitee.com:xiejs/mall.git']]])
+           checkout([$class: 'GitSCM', branches: [[name: "*/{branch}"]], extensions: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: 'git@github.com:handsight/mall.git']]])
         }
 
 
