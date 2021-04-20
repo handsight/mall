@@ -9,6 +9,7 @@
         <module>mall-eureka</module>
         <module>mall-stock</module>
         <module>mall-user</module>
+        <module>mall-auth</module>
     </modules>
 
     <parent>

@@ -28,7 +28,7 @@ def activeProfile="prod"
 
 
 node {
-        //把选择的项目信息转为数组 mall-eureka@6001,mall-user@7002,oauth2-server@7001,mall-stock@7003
+        //把选择的项目信息转为数组 mall-eureka@6001,mall-user@7002,mall-auth@7001,mall-stock@7003
         def selectedProjectNames = "${project_name}".split(',')
         //获取当前选择的服务器名称  master_server,slave_server1,slave_server2
         def selectedServers = "${publish_server}".split(",")
