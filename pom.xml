@@ -6,6 +6,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>mall-common</module>
+        <module>mall-eureka</module>
     </modules>
 
     <parent>
