@@ -1,0 +1,15 @@
+server:
+  port: 7002
+spring:
+  application:
+    name: mall-user
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+  client:
+    register-with-eureka: true #注册到Eureka的注册中心
+    fetch-registry: true #获取注册实例列表
+    service-url:
+      defaultZone: http://192.168.249.129:6001/eureka/,http://192.168.249.130:6001/eureka/

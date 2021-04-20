@@ -2,7 +2,13 @@
 /mall.iml
 /mall-common/mall-common.iml
 /mall-common/target/
+
 /mall-eureka/mall-eureka.iml
 /mall-eureka/target/
+
 /mall-stock/mall-stock.iml
 /mall-stock/target/
+
+
+/mall-user/mall-user.iml
+/mall-user/target/
