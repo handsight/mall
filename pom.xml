@@ -7,6 +7,7 @@
     <modules>
         <module>mall-common</module>
         <module>mall-eureka</module>
+        <module>mall-stock</module>
     </modules>
 
     <parent>
