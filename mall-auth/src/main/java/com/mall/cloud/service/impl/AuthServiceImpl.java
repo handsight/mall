@@ -125,7 +125,12 @@ public class AuthServiceImpl implements AuthService {
         }
         if(map == null || map.get("access_token") == null || map.get("refresh_token") == null || map.get("jti") == null) {
             //jti是jwt令牌的唯一标识作为用户身份令牌
-            throw new ServiceException("创建令牌失败！");
+            if(map==null){
+                throw new ServiceException("创建令牌失败！");
+            }else {
+                Object description = map.get("error_description");
+                throw new ServiceException(description.toString());
+            }
         }
 
         //将响应数据封装成AuthToken对象
