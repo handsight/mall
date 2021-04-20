@@ -85,6 +85,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.authorizeRequests()
                 //下边的路径放行
                 .antMatchers(
+                        //放行swagger相关接口
+                        "/swagger-ui.html","/swagger-resources/**","/images/**","/webjars/**","/v2/**","/configuration/**",
                         "/user/add","/user/login","/user/load/*"). //配置地址放行
                 permitAll()
                 .anyRequest()
