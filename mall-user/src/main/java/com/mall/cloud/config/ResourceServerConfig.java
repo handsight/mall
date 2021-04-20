@@ -1,5 +1,6 @@
 package com.mall.cloud.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -9,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.jwt.crypto.sign.RsaVerifier;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
@@ -30,6 +32,13 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     //公钥
     private static final String PUBLIC_KEY = "public.key";
+
+
+    @Autowired
+    AuthExceptionEntryPoint authExceptionEntryPoint;
+
+    @Autowired
+    CustomAccessDeniedHandler customAccessDeniedHandler;
 
     /***
      * 定义JwtTokenStore
@@ -78,9 +87,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
-        //放行 用户注册的请求
-        //其他的请求  必须有登录之后才能访问 (校验token合法才可以访问)
-
         //所有请求必须认证通过
         http.authorizeRequests()
                 //下边的路径放行
@@ -93,5 +99,13 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .authenticated();    //其他地址需要认证授权 /user/getCurrentUser 认证
     }
 
+
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources) {
+
+        //无效 token和权限不足异常重写
+        resources.authenticationEntryPoint(authExceptionEntryPoint)
+                .accessDeniedHandler(customAccessDeniedHandler);
+    }
 
 }
