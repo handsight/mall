@@ -59,7 +59,7 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public AuthToken refresh(String refreshToken, String clientId, String clientSecret) {
-        AuthToken refreshToken1 = getAuthToken(clientId, clientSecret, "refresh_token", false,refreshToken);
+        AuthToken refreshToken1 = getAuthToken(null,null,clientId, clientSecret, "refresh_token", false,refreshToken);
 
         return refreshToken1;
     }
@@ -74,11 +74,11 @@ public class AuthServiceImpl implements AuthService {
      * @return
      */
     private AuthToken applyToken(String username, String password, String clientId, String clientSecret) {
-        AuthToken authToken = getAuthToken(clientId, clientSecret,"password",true,null);
+        AuthToken authToken = getAuthToken(username,password,clientId, clientSecret,"password",true,null);
         return authToken;
     }
 
-    private AuthToken getAuthToken(String clientId, String clientSecret,String grantType,Boolean flag,String refreshToken) {
+    private AuthToken getAuthToken(String username,String password,String clientId, String clientSecret,String grantType,Boolean flag,String refreshToken) {
         //选中认证服务的地址
 //        ServiceInstance serviceInstance = this.loadBalancerClient.choose("oauth2-server");
 //        if (serviceInstance == null) {
