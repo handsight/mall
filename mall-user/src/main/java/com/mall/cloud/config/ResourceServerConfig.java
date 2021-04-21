@@ -93,7 +93,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers(
                         //放行swagger相关接口
                         "/swagger-ui.html","/swagger-resources/**","/images/**","/webjars/**","/v2/**","/configuration/**",
-                        "/user/add","/user/login","/user/load/*"). //配置地址放行
+                        "/user/getUserByUsername/*","/user/login","/user/load/*"). //配置地址放行
                 permitAll()
                 .anyRequest()
                 .authenticated();    //其他地址需要认证授权 /user/getCurrentUser 认证

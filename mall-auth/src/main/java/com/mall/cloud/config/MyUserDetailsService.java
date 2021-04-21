@@ -1,8 +1,10 @@
 package com.mall.cloud.config;
 
 
+import com.mall.cloud.api.UserFeignService;
+import com.mall.cloud.common.Result;
 import com.mall.cloud.dto.UserJwt;
-import com.mall.cloud.mapper.UserMapper;
+import com.mall.cloud.pojo.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,10 +28,10 @@ public class MyUserDetailsService implements UserDetailsService {
 
 
     @Autowired
-    private UserMapper userMapper;
+    private UserFeignService userFeignService;
 
     @Autowired
-    ClientDetailsService clientDetailsService;
+    private ClientDetailsService clientDetailsService;
 
 
     @Override
@@ -50,13 +52,20 @@ public class MyUserDetailsService implements UserDetailsService {
         if (StringUtils.isEmpty(username)) {
             return null;
         }
-        UserJwt userJwt = userMapper.findByUsername(username);
-        if(userJwt==null){
+//        UserJwt userJwt = userMapper.findByUsername(username);
+//        if(userJwt==null){
+//            return null;
+//        }
+
+        Result<UserDTO> result = userFeignService.getUserByUsername(username);
+        if(result.getData()==null){
             return null;
         }
-
+        UserDTO userDTO = result.getData();
         //对密码进行编码
-        String pwd = new BCryptPasswordEncoder().encode(userJwt.getPassword());
+        String pwd = new BCryptPasswordEncoder().encode(userDTO.getPassword());
+
+        UserJwt userJwt=new UserJwt();
         userJwt.setPassword(pwd);
         // 给用户设置权限  从数据库查询 暂时写死
         String permissions = "goods_list,product_list";

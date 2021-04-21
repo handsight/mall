@@ -1,11 +1,16 @@
 package com.mall.cloud.controller;
 
+import com.mall.cloud.common.Result;
+import com.mall.cloud.common.StatusCode;
 import com.mall.cloud.config.TokenDecode;
+import com.mall.cloud.mapper.UserMapper;
+import com.mall.cloud.pojo.dto.UserDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +22,8 @@ import java.util.Map;
 @Api(tags = "用户接口")
 public class UserController {
 
+    @Autowired
+    private UserMapper userMapper;
 
     @Autowired
     private TokenDecode tokenDecode;
@@ -36,4 +43,14 @@ public class UserController {
         String username = (String) map.get("username");
         System.out.println(id+username);
     }
+
+
+    @GetMapping("/getUserByUsername/{username}")
+    @ApiOperation(value = "根据用户名查询用户")
+    public Result<UserDTO> getCurrentUser(@PathVariable("username") String username) {
+        UserDTO userDTO=userMapper.findByUsername(username);
+        return new Result(true, StatusCode.OK,null,userDTO);
+    }
+
+
 }

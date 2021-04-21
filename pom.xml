@@ -11,6 +11,7 @@
         <module>mall-user</module>
         <module>mall-auth</module>
         <module>mall-gateway</module>
+        <module>mall-user-api</module>
     </modules>
 
     <parent>
@@ -79,6 +80,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -3,6 +3,16 @@ server:
 spring:
   application:
     name: mall-user
+  redis:
+    host: 172.30.4.43
+    port: 6379
+    password:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://172.30.3.107:3307/sharding_0?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=UTC
+    username: root
+    password: export
+
 
 eureka:
   instance:
@@ -13,3 +23,8 @@ eureka:
     fetch-registry: true #获取注册实例列表
     service-url:
       defaultZone: http://192.168.75.29:6001/eureka/ #配置注册中心地址
+      
+mybatis:
+  mapper-locations:
+    - classpath:mapper/*.xml
+    - classpath*:com/**/mapper/*.xml
