@@ -18,10 +18,10 @@ public class StockController {
     @Autowired
     private ProductStockService productStockService;
 
-    @GetMapping("/stock")
+    @GetMapping("/test")
     @ApiOperation(value = "测试分布式锁分断加锁库存")
     public Result stock(Integer productId, Integer bypPoductStock) {
-            productStockService.reduceProductStock(productId,bypPoductStock);
+//            productStockService.reduceProductStock(productId,bypPoductStock);
         return new Result(true, StatusCode.OK,"购买成功");
     }
 }

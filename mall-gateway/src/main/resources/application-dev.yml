@@ -1,0 +1,49 @@
+server:
+  port: 9999
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+  client:
+    register-with-eureka: true #注册到Eureka的注册中心
+    fetch-registry: true #获取注册实例列表
+    service-url:
+      defaultZone: http://192.168.75.29:6001/eureka/ #配置注册中心地址
+
+spring:
+  application:
+    name: mall-geteway
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]': # 匹配所有请求
+            allowedOrigins: "*" #跨域处理 允许所有的域
+            allowedMethods: # 支持的方法
+              - GET
+              - POST
+              - PUT
+              - DELETE
+      discovery:
+        locator:
+          # 开启服务注册和发现
+          # 如果为true，访问路径有两个：
+          # 1.ip:9200/gmaya-service-admin/user/test
+          # 2.ip:9200/admin/user/test  (这个是Path自己定义的/admin/**)
+          # 如果为false，访问路径有一个ip:9200/admin/user/test
+          enabled: true
+          # 服务名配置为小写
+          lower-case-service-id: true
+      routes:
+        - id: mall-stock # 不重复即可
+          uri: lb://mall-stock # 需要转发到的服务名称
+          predicates:
+             #以 /api/mall-stock开头的路径全部转发到lb://mall-stock的服务上
+            - Path=/api/mall-stock/**
+          filters:
+            # 去掉前面1个前缀,也就是真正转发访问的时候不带/api/mall-stock/
+            - StripPrefix=2
+
+#  http://localhost:9999/api/mall-stock/stock/test?productId=9527&bypPoductStock=1
+#  lb://mall-stock/stock/test?productId=9527&bypPoductStock=1
