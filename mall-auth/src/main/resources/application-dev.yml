@@ -43,7 +43,3 @@ encrypt:
     alias: malljelly
     password: malljelly
 
-mybatis:
-  mapper-locations:
-    - classpath:mapper/*.xml
-    - classpath*:com/**/mapper/*.xml
