@@ -2,6 +2,7 @@ package com.mall.cloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -10,9 +11,11 @@ import org.springframework.web.client.RestTemplate;
 import tk.mybatis.spring.annotation.MapperScan;
 
 
+//@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @SpringBootApplication
 @EnableEurekaClient
 @EnableFeignClients
+@MapperScan(basePackages = "com.mall.cloud.mapper")
 public class Oauth2Application {
     public static void main(String[] args) {
         SpringApplication.run(Oauth2Application.class, args);
