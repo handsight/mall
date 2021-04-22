@@ -36,6 +36,7 @@ spring:
           # 服务名配置为小写
           lower-case-service-id: true
       routes:
+        #微服务
         - id: mall-stock # 不重复即可
           uri: lb://mall-stock # 需要转发到的服务名称
           predicates:
@@ -44,6 +45,19 @@ spring:
           filters:
             # 去掉前面1个前缀,也就是真正转发访问的时候不带/api/mall-stock/
             - StripPrefix=2
+        - id: mall-user
+          uri: lb://mall-user
+          predicates:
+            - Path=/api/mall-user/**
+          filters:
+            - StripPrefix=2
+        - id: mall-auth
+          uri: lb://mall-auth
+          predicates:
+            - Path=/api/mall-auth/**
+          filters:
+            - StripPrefix=2
+
 
 #  http://localhost:9999/api/mall-stock/stock/test?productId=9527&bypPoductStock=1
 #  lb://mall-stock/stock/test?productId=9527&bypPoductStock=1

@@ -12,6 +12,7 @@
         <module>mall-auth</module>
         <module>mall-gateway</module>
         <module>mall-user-api</module>
+        <module>mall-security</module>
     </modules>
 
     <parent>
