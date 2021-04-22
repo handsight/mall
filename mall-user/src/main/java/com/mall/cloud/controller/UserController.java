@@ -56,8 +56,9 @@ public class UserController {
 
     @GetMapping("/testToken")
     @ApiOperation(value = "测试微服务之间调用携带token")
-    public void testToken( HttpServletRequest request) {
+    public Result testToken( HttpServletRequest request) {
         System.out.println("头信息为:" + request.getHeader("Authorization"));
+        return new Result(true, StatusCode.OK,null,null);
     }
 
 

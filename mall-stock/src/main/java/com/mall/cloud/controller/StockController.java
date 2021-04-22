@@ -36,8 +36,8 @@ public class StockController {
     @GetMapping("/user")
     @ApiOperation(value = "测试微服务之间调用携带token")
     public Result user() {
-        userFeignService.testToken();
+        Result result = userFeignService.testToken();
 
-        return new Result(true, StatusCode.OK,"调用成功");
+        return new Result(true, StatusCode.OK,result.getMessage());
     }
 }
