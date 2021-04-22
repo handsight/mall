@@ -4,6 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
@@ -36,8 +37,9 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
         String token = request.getHeaders().getFirst(AUTHORIZE_TOKEN);
 
         if(StringUtils.isEmpty(token)){
-            //4.4. 如果没有登录,要重定向到登录到页面
-            return chain.filter(exchange);
+            //设置方法不允许被访问，405错误代码  或者重定向到登录到页
+            response.setStatusCode(HttpStatus.METHOD_NOT_ALLOWED);
+            return response.setComplete();
         }
 
         //5 把原本的解析令牌 放到各个微服务 mall-security包下的公钥解析
