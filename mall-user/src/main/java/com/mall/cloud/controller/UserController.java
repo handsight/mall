@@ -8,6 +8,7 @@ import com.mall.cloud.pojo.dto.UserDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,6 +43,21 @@ public class UserController {
         Integer id = (Integer)map.get("id");
         String username = (String) map.get("username");
         System.out.println(id+username);
+    }
+
+    @GetMapping("/list")
+    @ApiOperation(value = "携带token 访问受保护的资源 必须拥有user_list的权限才能访问")
+    @PreAuthorize(value = "hasAuthority('user_list')")
+    public void list( HttpServletRequest request) {
+        System.out.println("头信息为:" + request.getHeader("Authorization"));
+        System.out.println("携带token 访问受保护的资源 必须拥有user_list的权限才能访问");
+    }
+
+
+    @GetMapping("/testToken")
+    @ApiOperation(value = "测试微服务之间调用携带token")
+    public void testToken( HttpServletRequest request) {
+        System.out.println("头信息为:" + request.getHeader("Authorization"));
     }
 
 

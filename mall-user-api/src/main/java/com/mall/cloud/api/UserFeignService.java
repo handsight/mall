@@ -11,4 +11,9 @@ public interface  UserFeignService {
 
     @GetMapping("/user/getUserByUsername/{username}")
     Result<UserDTO> getUserByUsername(@PathVariable("username") String username);
+
+
+    @GetMapping("/user/testToken")
+    Result testToken();
+
 }

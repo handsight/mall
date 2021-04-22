@@ -24,6 +24,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.mall.cloud</groupId>
+            <artifactId>mall-user-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.redisson</groupId>
             <artifactId>redisson</artifactId>
             <version>3.15.3</version>

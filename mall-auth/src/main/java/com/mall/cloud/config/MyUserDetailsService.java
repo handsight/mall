@@ -68,7 +68,7 @@ public class MyUserDetailsService implements UserDetailsService {
         UserJwt userJwt=new UserJwt();
         userJwt.setPassword(pwd);
         // 给用户设置权限  从数据库查询 暂时写死
-        String permissions = "goods_list,product_list";
+        String permissions = "user_add,user_update";
         List<GrantedAuthority> authorityList = AuthorityUtils.commaSeparatedStringToAuthorityList(permissions);
         userJwt.setAuthorities(authorityList);
         return userJwt;

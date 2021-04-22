@@ -23,7 +23,10 @@ eureka:
     service-url:
       defaultZone: http://192.168.249.129:6001/eureka/,http://192.168.249.130:6001/eureka/
 
-
+#配置文件开启OpenFeign使用OkHttp作为底层的client
+feign:
+  okhttp:
+    enabled: true
 
 mybatis:
   mapper-locations:
