@@ -19,7 +19,6 @@ public class StockController {
     @Autowired
     private ProductStockService productStockService;
 
-
     @Autowired
     private UserFeignService userFeignService;
 

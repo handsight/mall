@@ -1,0 +1,39 @@
+server:
+  port: 7004
+
+spring:
+  application:
+    name: mall-seckill
+  redis:
+    host: 172.30.4.43
+    port: 6379
+    password:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://172.30.3.107:3307/sharding_0?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=UTC
+    username: root
+    password: export
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+  client:
+    register-with-eureka: true #注册到Eureka的注册中心
+    fetch-registry: true #获取注册实例列表
+    service-url:
+      defaultZone: http://192.168.75.29:6001/eureka/ #配置注册中心地址
+
+
+rocketmq:
+  # NameServer地址
+  name-server: 172.31.36.77:9876
+  producer:
+    #生产者的组名
+    group: qup-ucneter
+    #消息最大长度 默认1024*4(4M)
+    maxMessageSize: 4096
+    #发送消息超时时间,默认3000
+    sendMessageTimeout: 3000
+    #发送消息失败重试次数，默认2
+    retryTimesWhenSendFailed: 2
