@@ -1,6 +1,5 @@
 server:
   port: 7004
-
 spring:
   application:
     name: mall-seckill
