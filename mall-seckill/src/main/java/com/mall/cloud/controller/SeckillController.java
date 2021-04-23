@@ -52,10 +52,14 @@ public class SeckillController {
     @ApiOperation(value = "测试秒杀")
     public Result stock(Long userId, Long seckillId) {
 
-        Long userQueueCount = stringRedisTemplate.opsForHash().increment("repeat" + seckillId, userId.toString(), 1);
-        if(userQueueCount>1){
-            throw new ServiceException("同一个商品重复抢单");
-        }
+        /**
+         * 商品1 有10个库存
+         *
+         * 假设A发起10次请求 每次4个
+         * 假设B发起10次请求 每次3个
+         * 假设C发起10次请求 每次2个
+         *
+         */
 
         //2.原子性扣减
         Long stock = stringRedisTemplate.opsForHash().increment("seckill_stock", seckillId.toString(), -1);
@@ -71,6 +75,13 @@ public class SeckillController {
             return new Result(false, StatusCode.ERROR,"不能重复秒杀");
         }
 
+        //4.走到这一步
+        Long userQueueCount = stringRedisTemplate.opsForHash().increment("repeat" + seckillId, userId.toString(), 1);
+        if(userQueueCount>1){
+            //加回去
+            stringRedisTemplate.opsForHash().increment("seckill_stock", seckillId.toString(), 1);
+            throw new ServiceException("同一个商品重复抢单");
+        }
         SeckillVo seckillVo=new SeckillVo();
         seckillVo.setUserId(userId);
 
