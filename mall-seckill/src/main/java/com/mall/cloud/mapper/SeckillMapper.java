@@ -12,7 +12,7 @@ public interface SeckillMapper {
     SeckillEntity findBySeckillId(@Param("seckillId") Long seckillId);
 
 
-    @Update("update m_seckill_stock set inventory=inventory-1, version=version+1 where  seckillId=#{seckillId} and inventory>0  and version=#{version}")
-    int inventoryDeduction(@Param("seckillId") Long seckillId, @Param("version") Long version);
+    @Update("update m_seckill_stock set inventory=inventory-#{num}, version=version+1 where  seckillId=#{seckillId} and inventory>0  and version=#{version}")
+    int inventoryDeduction(@Param("seckillId") Long seckillId,@Param("num") Integer num, @Param("version") Long version);
 
 }

@@ -9,4 +9,6 @@ public class SeckillVo {
     private Long seckillId;
 
     private Long userId;
+
+    private Integer num;
 }
