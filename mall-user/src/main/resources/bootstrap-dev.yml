@@ -3,9 +3,10 @@ server:
 spring:
   application:
     name: mall-user
-  nacos:
-    discovery:
-      server-addr: http://localhost:8848
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://localhost:8848
   redis:
     host: 172.30.4.43
     port: 6379

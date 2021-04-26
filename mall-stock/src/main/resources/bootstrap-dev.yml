@@ -3,9 +3,10 @@ server:
 spring:
   application:
     name: mall-stock
-  nacos:
-    discovery:
-      server-addr: http://localhost:8848
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://localhost:8848
     config:
       file-extension: yaml  # 必须修改成yaml
       group: DEFAULT_GROUP  # 缺省即可
