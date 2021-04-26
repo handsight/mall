@@ -16,9 +16,11 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
+            <version>3.0.2</version>
         </dependency>
 
         <dependency>
@@ -26,9 +28,10 @@
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
             <version>2.2.7.RELEASE</version>
         </dependency>
+
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
 
     </dependencies>

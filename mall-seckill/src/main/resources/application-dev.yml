@@ -3,6 +3,9 @@ server:
 spring:
   application:
     name: mall-seckill
+  nacos:
+    discovery:
+      server-addr: http://localhost:8848
   redis:
     host: 172.30.4.43
     port: 6379
@@ -13,15 +16,15 @@ spring:
     username: root
     password: export
 
-eureka:
-  instance:
-    prefer-ip-address: true
-    ip-address: 127.0.0.1
-  client:
-    register-with-eureka: true #注册到Eureka的注册中心
-    fetch-registry: true #获取注册实例列表
-    service-url:
-      defaultZone: http://192.168.75.29:6001/eureka/ #配置注册中心地址
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#    ip-address: 127.0.0.1
+#  client:
+#    register-with-eureka: true #注册到Eureka的注册中心
+#    fetch-registry: true #获取注册实例列表
+#    service-url:
+#      defaultZone: http://192.168.75.29:6001/eureka/ #配置注册中心地址
 
 
 rocketmq:

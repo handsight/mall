@@ -24,9 +24,6 @@ import java.util.Map;
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    @Autowired
-    private LoadBalancerClient loadBalancerClient;
-
 
     @Autowired
     private RestTemplate restTemplate;
