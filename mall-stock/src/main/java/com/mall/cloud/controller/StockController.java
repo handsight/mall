@@ -7,13 +7,16 @@ import com.mall.cloud.service.ProductStockService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+//https://www.cnblogs.com/haoxianrui/p/13585125.html
 @RestController
 @RequestMapping(value = "/stock")
 @Api(tags = "库存接口")
+@RefreshScope
 public class StockController {
 
     @Autowired
@@ -21,6 +24,9 @@ public class StockController {
 
     @Autowired
     private UserFeignService userFeignService;
+
+    @Value("${rsa.publicKey}")
+    public String publicKey;
 
 
     @GetMapping("/test")
@@ -36,7 +42,12 @@ public class StockController {
     @ApiOperation(value = "测试微服务之间调用携带token")
     public Result user() {
         Result result = userFeignService.testToken();
-
         return new Result(true, StatusCode.OK,result.getMessage());
+    }
+
+
+    @GetMapping("/publicKey")
+    public Result getPublicKey(){
+        return new Result(true, StatusCode.OK,publicKey);
     }
 }

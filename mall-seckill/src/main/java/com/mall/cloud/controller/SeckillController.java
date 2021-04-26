@@ -12,6 +12,8 @@ import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping(value = "/seckill")
 @Api(tags = "秒杀接口")
 @Slf4j
+@RefreshScope
 public class SeckillController {
 
     @Autowired
@@ -30,6 +33,10 @@ public class SeckillController {
 
     @Autowired
     private  RocketMQTemplate rocketMQTemplate;
+
+
+    @Value("${rsa.publicKey}")
+    public String publicKey;
 
     @GetMapping("/test")
     @ApiOperation(value = "测试秒杀")
@@ -83,5 +90,12 @@ public class SeckillController {
             return new Result(false, StatusCode.ERROR,"秒杀失败");
         }
         return new Result(true, StatusCode.OK,"秒杀成功");
+    }
+
+
+    @GetMapping("/publicKey")
+    @ApiOperation(value = "测试nacos-config")
+    public Result getPublicKey(){
+        return new Result(true, StatusCode.OK,publicKey);
     }
 }

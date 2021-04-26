@@ -6,6 +6,12 @@ spring:
   nacos:
     discovery:
       server-addr: http://localhost:8848
+    config:
+      file-extension: yaml  # 必须修改成yaml
+      group: DEFAULT_GROUP  # 缺省即可
+      prefix: ${spring.application.name} # 缺省即可
+
+
   redis:
     host: 172.30.4.43
     port: 6379
@@ -39,3 +45,6 @@ rocketmq:
     sendMessageTimeout: 3000
     #发送消息失败重试次数，默认2
     retryTimesWhenSendFailed: 2
+
+rsa:
+  publicKey: 123456789
