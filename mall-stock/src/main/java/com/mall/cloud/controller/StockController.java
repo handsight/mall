@@ -25,8 +25,6 @@ public class StockController {
     @Autowired
     private UserFeignService userFeignService;
 
-    @Value("${rsa.publicKey}")
-    public String publicKey;
 
 
     @GetMapping("/test")
@@ -45,9 +43,4 @@ public class StockController {
         return new Result(true, StatusCode.OK,result.getMessage());
     }
 
-
-    @GetMapping("/publicKey")
-    public Result getPublicKey(){
-        return new Result(true, StatusCode.OK,publicKey);
-    }
 }

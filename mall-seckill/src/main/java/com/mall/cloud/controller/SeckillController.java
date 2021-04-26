@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.mall.cloud.common.Result;
 import com.mall.cloud.common.StatusCode;
 import com.mall.cloud.exception.ServiceException;
+import com.mall.cloud.mapper.SeckillMapper;
+import com.mall.cloud.pojo.SeckillEntity;
 import com.mall.cloud.pojo.vo.SeckillVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,6 +35,8 @@ public class SeckillController {
 
     @Autowired
     private  RocketMQTemplate rocketMQTemplate;
+    @Autowired
+    private SeckillMapper seckillMapper;
 
 
     @Value("${rsa.publicKey}")
@@ -96,6 +100,8 @@ public class SeckillController {
     @GetMapping("/publicKey")
     @ApiOperation(value = "测试nacos-config")
     public Result getPublicKey(){
+        SeckillEntity entity = seckillMapper.findBySeckillId(1L);
+
         return new Result(true, StatusCode.OK,publicKey);
     }
 }
