@@ -83,7 +83,7 @@ public class AuthServiceImpl implements AuthService {
 //        }
 //        获取令牌的url
 //        String path = serviceInstance.getInstanceId() + "/oauth/token";
-         String path ="http://mall-auth/oauth/token";
+         String path ="http://mall_auth/oauth/token";
         //定义body
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         //授权方式

@@ -2,11 +2,18 @@ server:
   port: 7002
 spring:
   application:
-    name: mall-user
+    name: mall_user
   cloud:
     nacos:
       discovery:
         server-addr: http://localhost:8848
+      config:
+        server-addr: http://localhost:8848
+        file-extension: yaml  # 必须修改成yaml
+        group: DEFAULT_GROUP  # 缺省即可
+        prefix: ${spring.application.name} # 缺省即可
+
+
   redis:
     host: 172.30.4.43
     port: 6379
