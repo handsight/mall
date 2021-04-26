@@ -23,6 +23,8 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
                        AccessDeniedException accessDeniedException){
+
+        //被全局异常处理器拦截了
         response.setStatus(HttpStatus.OK.value());
         response.setHeader("Content-Type", "application/json;charset=UTF-8");
         Result result=new Result(false, StatusCode.ERROR,accessDeniedException.getMessage());
