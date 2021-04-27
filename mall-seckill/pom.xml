@@ -24,6 +24,13 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>com.mall.cloud</groupId>
+            <artifactId>mall-user-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+
         <!-- mybatis整合springboot-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -39,7 +46,19 @@
         </dependency>
 
 
-        <!--nacos注册中心-->
+        <!--spring cloud alibaba sentinel 和服务熔断相关-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
+
+        <!--持久化会用到-->
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-datasource-nacos</artifactId>
+        </dependency>
+
+        <!--spring cloud alibaba nacos discovery 和服务注册相关-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>

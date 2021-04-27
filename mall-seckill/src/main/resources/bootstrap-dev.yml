@@ -12,6 +12,19 @@ spring:
         file-extension: yaml  # 必须修改成yaml
         group: DEFAULT_GROUP  # 缺省即可
         prefix: ${spring.application.name} # 缺省即可
+    sentinel:
+      transport:
+        dashboard: localhost:8080 # 配置Sentinel Dashboard浏览器控制台地址 8080会监控8401服务
+        port: 8719 # Sentinel默认端口8719
+      # Sentinel持久化配置
+      datasource:
+        ds1:
+          nacos:
+            server-addr: http://localhost:8848
+            data-id: ${spring.application.name}
+            group-id: DEFAULT_GROUP # 默认设置好了这里可以不写
+            data-type: json # 默认设置好了这里可以不写
+            rule-type: flow
 
 
   redis:
@@ -24,6 +37,17 @@ spring:
     username: root
     password: export
 
+#监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+# 激活Sentinel对Feign的支持
+feign:
+  sentinel:
+    enabled: true
 #eureka:
 #  instance:
 #    prefer-ip-address: true

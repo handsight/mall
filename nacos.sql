@@ -11,7 +11,7 @@
  Target Server Version : 50722
  File Encoding         : 65001
 
- Date: 26/04/2021 17:47:01
+ Date: 27/04/2021 15:04:16
 */
 
 SET NAMES utf8mb4;
@@ -40,12 +40,13 @@ CREATE TABLE `config_info`  (
   `c_schema` text CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_configinfo_datagrouptenant`(`data_id`, `group_id`, `tenant_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of config_info
 -- ----------------------------
 INSERT INTO `config_info` VALUES (1, 'mall_seckill-dev.yaml', 'DEFAULT_GROUP', 'rsa:\n  publicKey: 222', '37264174fde6c0e7bc3735d1d3472bd0', '2021-04-26 09:45:43', '2021-04-26 09:46:48', NULL, '0:0:0:0:0:0:0:1', '', '', '', '', '', 'yaml', '');
+INSERT INTO `config_info` VALUES (5, 'mall_seckill', 'DEFAULT_GROUP', '[\r\n    {\r\n        \"resource\": \"customerBlockHandler\",\r\n        \"limitApp\": \"default\",  \r\n        \"grade\": 1,\r\n        \"count\": 1,\r\n        \"strategy\": 0,\r\n        \"controlBehavior\": 0,\r\n        \"clusterMode\": false\r\n    }\r\n]', '2f30e14cce53e71ee436ade8f8e29ebe', '2021-04-27 06:39:26', '2021-04-27 06:39:26', NULL, '192.168.75.29', '', '', NULL, NULL, NULL, 'json', NULL);
 
 -- ----------------------------
 -- Table structure for config_info_aggr
@@ -184,13 +185,17 @@ CREATE TABLE `his_config_info`  (
   INDEX `idx_gmt_create`(`gmt_create`) USING BTREE,
   INDEX `idx_gmt_modified`(`gmt_modified`) USING BTREE,
   INDEX `idx_did`(`data_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '多租户改造' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '多租户改造' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of his_config_info
 -- ----------------------------
 INSERT INTO `his_config_info` VALUES (0, 1, 'mall_seckill-dev.yaml', 'DEFAULT_GROUP', '', 'rsa:\r\n  publicKey: 111', '8daaa1273966c633db863b3914b72689', '2021-04-26 17:45:44', '2021-04-26 09:45:43', NULL, '0:0:0:0:0:0:0:1', 'I', '');
 INSERT INTO `his_config_info` VALUES (1, 2, 'mall_seckill-dev.yaml', 'DEFAULT_GROUP', '', 'rsa:\r\n  publicKey: 111', '8daaa1273966c633db863b3914b72689', '2021-04-26 17:46:50', '2021-04-26 09:46:48', NULL, '0:0:0:0:0:0:0:1', 'U', '');
+INSERT INTO `his_config_info` VALUES (0, 3, 'mall_seckill-dev', 'DEFAULT_GROUP', '', '[\r\n    {\r\n        \"resource\": \"customerBlockHandler\",\r\n        \"limitApp\": \"default\",  \r\n        \"grade\": 1,\r\n        \"count\": 1,\r\n        \"strategy\": 0,\r\n        \"controlBehavior\": 0,\r\n        \"clusterMode\": false\r\n    }\r\n]', '2f30e14cce53e71ee436ade8f8e29ebe', '2021-04-27 14:34:57', '2021-04-27 06:34:54', NULL, '192.168.75.29', 'I', '');
+INSERT INTO `his_config_info` VALUES (3, 4, 'mall_seckill-dev', 'DEFAULT_GROUP', '', '[\r\n    {\r\n        \"resource\": \"customerBlockHandler\",\r\n        \"limitApp\": \"default\",  \r\n        \"grade\": 1,\r\n        \"count\": 1,\r\n        \"strategy\": 0,\r\n        \"controlBehavior\": 0,\r\n        \"clusterMode\": false\r\n    }\r\n]', '2f30e14cce53e71ee436ade8f8e29ebe', '2021-04-27 14:35:45', '2021-04-27 06:35:42', NULL, '192.168.75.29', 'U', '');
+INSERT INTO `his_config_info` VALUES (0, 5, 'mall_seckill', 'DEFAULT_GROUP', '', '[\r\n    {\r\n        \"resource\": \"customerBlockHandler\",\r\n        \"limitApp\": \"default\",  \r\n        \"grade\": 1,\r\n        \"count\": 1,\r\n        \"strategy\": 0,\r\n        \"controlBehavior\": 0,\r\n        \"clusterMode\": false\r\n    }\r\n]', '2f30e14cce53e71ee436ade8f8e29ebe', '2021-04-27 14:39:28', '2021-04-27 06:39:26', NULL, '192.168.75.29', 'I', '');
+INSERT INTO `his_config_info` VALUES (3, 6, 'mall_seckill-dev', 'DEFAULT_GROUP', '', '[\n    {\n        \"resource\": \"customerBlockHandler\",\n        \"limitApp\": \"default\",  \n        \"grade\": 1,\n        \"count\": 1,\n        \"strategy\": 0,\n        \"controlBehavior\": 0,\n        \"clusterMode\": false\n    }\n]', '10a0cc012457948501916a8381e28756', '2021-04-27 15:03:14', '2021-04-27 07:03:11', NULL, '192.168.75.29', 'D', '');
 
 -- ----------------------------
 -- Table structure for permissions
