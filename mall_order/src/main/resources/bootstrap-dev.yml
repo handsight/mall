@@ -1,0 +1,16 @@
+server:
+  port: 7005
+
+
+spring:
+  application:
+    name: mall_order
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://localhost:8848
+      config:
+        server-addr: http://localhost:8848
+        file-extension: yaml  # 必须修改成yaml
+        group: DEFAULT_GROUP  # 缺省即可
+        prefix: ${spring.application.name} # 缺省即可
