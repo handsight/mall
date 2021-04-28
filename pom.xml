@@ -14,7 +14,7 @@
         <module>mall-user-api</module>
         <module>mall-security</module>
         <module>mall-seckill</module>
-        <module>mall_order</module>
+        <module>mall-order</module>
     </modules>
 
     <parent>
