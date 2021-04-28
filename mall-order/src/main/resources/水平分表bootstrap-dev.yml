@@ -26,10 +26,11 @@ spring:
         username: root
         password: root
     sharding:
+      broadcast-tables: t_dict #指定公共表
       tables:
-        t_order:  #指定t_order表的数据分布情况，配置数据节点
+        t_order:  #表t_order的分库分表策略 如何将一个逻辑表映射为多个实际表
           actualDataNodes: m1.t_order_$->{1..5}
-          tableStrategy: #指定t_order表的分片策略-->分片策略包括分片键 order_id和分片算法取模
+          tableStrategy:  #分表的策略
             inline:
               shardingColumn: order_id
               algorithmExpression: t_order_$->{order_id % 5 + 1}
