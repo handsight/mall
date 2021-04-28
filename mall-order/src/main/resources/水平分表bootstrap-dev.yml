@@ -1,0 +1,44 @@
+server:
+  port: 7005
+
+
+spring:
+  application:
+    name: mall_order
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://localhost:8848
+      config:
+        server-addr: http://localhost:8848
+        file-extension: yaml  # 必须修改成yaml
+        group: DEFAULT_GROUP  # 缺省即可
+        prefix: ${spring.application.name} # 缺省即可
+
+  #分库分表配置 基于4.X文档
+  shardingsphere:
+    datasource:
+      names: m1  #定义数据源
+      m1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/order_db?useUnicode=true
+        username: root
+        password: root
+    sharding:
+      tables:
+        t_order:  #指定t_order表的数据分布情况，配置数据节点
+          actualDataNodes: m1.t_order_$->{1..5}
+          tableStrategy: #指定t_order表的分片策略-->分片策略包括分片键 order_id和分片算法取模
+            inline:
+              shardingColumn: order_id
+              algorithmExpression: t_order_$->{order_id % 5 + 1}
+          keyGenerator:  #指定t_order表的主键order_id生成策略为SNOWFLAKE雪花算法
+            type: SNOWFLAKE
+            column: order_id
+    props:
+      sql:
+        show: true #打开sql输出日志
+  main:
+    allow-bean-definition-overriding: true
+

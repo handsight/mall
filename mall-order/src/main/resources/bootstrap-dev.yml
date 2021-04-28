@@ -18,27 +18,38 @@ spring:
   #分库分表配置 基于4.X文档
   shardingsphere:
     datasource:
-      names: m1  #定义数据源
-      m1:
+      names: order1,order2  #定义2个数据源
+      order1:
         type: com.alibaba.druid.pool.DruidDataSource
         driverClassName: com.mysql.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/order_db?useUnicode=true
+        url: jdbc:mysql://localhost:3306/order_db_1?useUnicode=true
+        username: root
+        password: root
+      order2:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/order_db_2?useUnicode=true
         username: root
         password: root
     sharding:
-      tables:
-        t_order:  #指定t_order表的数据分布情况，配置数据节点
-          actualDataNodes: m1.t_order_$->{1..5}
-          tableStrategy: #指定t_order表的分片策略-->分片策略包括分片键 order_id和分片算法取模
-            inline:
-              shardingColumn: order_id
-              algorithmExpression: t_order_$->{order_id % 5 + 1}
-          keyGenerator:  #指定t_order表的主键order_id生成策略为SNOWFLAKE雪花算法
-            type: SNOWFLAKE
+      tables: #分表策略，如何将一个逻辑表映射为多个实际表
+        t_order:
+          actual-data-nodes: order$->{1..2}.t_order_$->{1..3}
+          key-generator: #指定t_order表的主键order_id生成策略为SNOWFLAKE雪花算法
             column: order_id
+            type: SNOWFLAKE
+          #分库的策略  以user_id为分片键，分片策略为user_id % 2+1 ，user_id为偶数操作order1数据源，否则操作order2
+          database-strategy:
+            inline:
+              algorithm-expression: order$->{user_id % 2+1}
+              sharding-column: user_id
+           #分表的策略
+          table-strategy:  #指定t_order表的分片策略-->分片策略包括分片键 order_id和分片算法取模
+            inline:
+              algorithmExpression: t_order_$->{order_id % 3 + 1}
+              sharding-column: order_id
     props:
       sql:
         show: true #打开sql输出日志
   main:
     allow-bean-definition-overriding: true
-
