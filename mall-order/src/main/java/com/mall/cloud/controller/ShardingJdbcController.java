@@ -28,9 +28,16 @@ public class ShardingJdbcController {
     @GetMapping("/addOrder")
     @ApiOperation(value = "测试添加分库分表订单")
     public Result addOrder() {
-        for (int i = 1; i < 20; i++) {
-            orderMapper.insertOrder(new BigDecimal(i),  Long.parseLong(String.valueOf(i)), "SUCCESS");
-        }
+//        for (int i = 1; i < 20; i++) {
+//            orderMapper.insertOrder(new BigDecimal(i),  Long.parseLong(String.valueOf(i)), "SUCCESS");
+//        }
+
+        /**
+         * 根据用户id计算存储的库,再根据订单id计算存储的表
+         */
+        Long u1=1L;
+        orderMapper.insertOrder(new BigDecimal("9527"),  u1, "SUCCESS");
+
         return new Result(true, StatusCode.OK, "添加成功");
     }
 
