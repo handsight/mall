@@ -44,6 +44,7 @@ public class CustomShardingTableStrategy implements ComplexKeysShardingAlgorithm
                     String value = "_u" + userId + "_o" + orderId;
                     if (target.endsWith(value)) {
                         shardingSuffix.add(target);
+                        break;
                     }
                 }
             }

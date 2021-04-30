@@ -46,6 +46,7 @@ public class CustomShardingDatabaseStrategy implements ComplexKeysShardingAlgori
             for (String target : availableTargetNames) {
                 if (target.endsWith(num.toString())) {
                     shardingSuffix.add(target);
+                    break;
                 }
             }
         }
