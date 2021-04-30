@@ -11,6 +11,8 @@ import java.util.Map;
 /**
  *自定义表的复合分片策略
  *
+ *参考地址
+ * https://blog.csdn.net/duduyingya/article/details/106120404?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-4&spm=1001.2101.3001.4242
  *
  */
 public class CustomShardingTableStrategy implements ComplexKeysShardingAlgorithm <String>{
